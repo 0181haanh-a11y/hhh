@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>05/03/2026</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+<style>
+body{
+  margin:0;
+  height:100vh;
+  overflow:hidden;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:
+    linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)),
+    url("background1.jpg") center/cover no-repeat;
+}
+/* 🎉 NỀN SAU KHI HẾT GIỜ */
+body.birthday-mode{
+  background:
+    linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)),
+    url("background2.png") center/cover no-repeat;
+}
+
+/* ================= WAITING SCREEN ================= */
+
+.waiting-wrapper{
+  background:rgba(255,255,255,0.75);
+  padding:20px 35px;
+  border-radius:18px;
+  backdrop-filter:blur(3px);
+  text-align:center;
+  display:inline-block;
+}
+
+.waiting-row{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:30px;
+}
+
+.waiting-text{
+  font-family:'Pacifico',cursive;
+  font-size:85px;
+  color:#2f1f16;
+  margin:0;
+}
+
+.icon{
+  font-size:50px;
+  animation:sparkle 1.2s infinite alternate ease-in-out;
+}
+
+.icon:first-child{
+  animation-delay:0.4s;
+}
+
+@keyframes sparkle{
+  0%{ transform:scale(1); filter:brightness(1); }
+  100%{ transform:scale(1.35); filter:brightness(1.8); }
+}
+
+.countdown{
+  font-family:Arial;
+  margin-top:15px;
+  font-size:22px;
+  color:#2f1f16;
+}
+
+/* ================= BIRTHDAY TEXT ================= */
+
+.birthday-container{
+  position:relative;
+  z-index:5;
+  text-align:center;
+}
+
+.birthday-text{
+  font-family:'Fredoka',sans-serif;
+  font-weight:700;
+  font-size:200px;
+  color:#f6f1e8;
+  line-height:1.1;
+  white-space:pre-line;
+  overflow:hidden;
+  width:0;
+  text-shadow:
+    0 0 20px rgba(255,248,220,0.9),
+    0 0 40px rgba(255,248,220,0.7),
+    0 0 70px rgba(255,248,220,0.6);
+  animation:typing 3s steps(20,end) forwards;
+}
+
+@keyframes typing{
+  from{width:0}
+  to{width:100%}
+}
+
+/* ================= BALLOONS ================= */
+
+.balloon{
+  position:absolute;
+  bottom:-200px;
+  width:80px;
+  height:110px;
+  border-radius:50% 50% 45% 45%;
+  animation:floatUp linear infinite, sway 3s ease-in-out infinite alternate;
+  opacity:0.95;
+}
+
+.balloon::before{
+  content:"";
+  position:absolute;
+  top:20px;
+  left:15px;
+  width:25px;
+  height:35px;
+  background:rgba(255,255,255,0.6);
+  border-radius:50%;
+  filter:blur(4px);
+}
+
+.balloon::after{
+  content:"";
+  position:absolute;
+  bottom:-45px;
+  left:50%;
+  width:2px;
+  height:45px;
+  background:white;
+  transform:translateX(-50%);
+}
+
+@keyframes floatUp{
+  from{transform:translateY(0);}
+  to{transform:translateY(-130vh);}
+}
+
+@keyframes sway{
+  from{margin-left:-15px;}
+  to{margin-left:15px;}
+}
+
+.balloon:nth-child(1){left:5%;background:#ff6b6b;animation-duration:5s;}
+.balloon:nth-child(2){left:12%;background:#feca57;animation-duration:5.5s;}
+.balloon:nth-child(3){left:20%;background:#48dbfb;animation-duration:6s;}
+.balloon:nth-child(4){left:28%;background:#1dd1a1;animation-duration:5.2s;}
+.balloon:nth-child(5){left:36%;background:#ff9ff3;animation-duration:6.1s;}
+.balloon:nth-child(6){left:44%;background:#54a0ff;animation-duration:5.3s;}
+.balloon:nth-child(7){left:52%;background:#ee5253;animation-duration:5.8s;}
+.balloon:nth-child(8){left:60%;background:#f368e0;animation-duration:6s;}
+.balloon:nth-child(9){left:68%;background:#00d2d3;animation-duration:5.4s;}
+.balloon:nth-child(10){left:76%;background:#ff9f43;animation-duration:6s;}
+.balloon:nth-child(11){left:84%;background:#10ac84;animation-duration:5.6s;}
+.balloon:nth-child(12){left:92%;background:#576574;animation-duration:5.7s;}
+.balloon:nth-child(13){left:18%;background:#ff4757;animation-duration:5.9s;}
+.balloon:nth-child(14){left:58%;background:#2ed573;animation-duration:6.2s;}
+.balloon:nth-child(15){left:80%;background:#3742fa;animation-duration:5.5s;}
+
+/* ================= FIREWORKS CSS ================= */
+
+.firework{
+  position:absolute;
+  width:10px;
+  height:10px;
+  border-radius:50%;
+  animation:explode 2.5s ease-out infinite;
+}
+
+.firework:nth-child(16){top:20%;left:30%;}
+.firework:nth-child(17){top:35%;left:70%;animation-delay:1s;}
+.firework:nth-child(18){top:55%;left:50%;animation-delay:2s;}
+.firework:nth-child(19){top:25%;left:80%;animation-delay:0.5s;}
+.firework:nth-child(20){top:60%;left:20%;animation-delay:1.5s;}
+.firework:nth-child(21){top:40%;left:45%;animation-delay:2.5s;}
+
+@keyframes explode{
+  0%{box-shadow:0 0 white;opacity:1;}
+  100%{
+    box-shadow:
+      0 -120px #ff4757,
+      85px -85px #ffa502,
+      120px 0 #1e90ff,
+      85px 85px #2ed573,
+      0 120px #e84393,
+      -85px 85px #00cec9,
+      -120px 0 #fdcb6e,
+      -85px -85px #ffffff;
+    opacity:0;
+  }
+}
+</style>
+</head>
+
+<body>
+<div id="content"></div>
+
+<script>
+const targetDate = new Date("February 28, 2026 10:27:00").getTime();
+const content = document.getElementById("content");
+
+function launchConfetti(){
+  confetti({
+    particleCount:120,
+    spread:100,
+    origin:{x:Math.random(), y:Math.random()*0.6},
+    startVelocity:45,
+    gravity:0.8,
+    ticks:200,
+    scalar:1.2,
+    colors:['#ff4d6d','#ffd166','#06d6a0','#118ab2','#ffffff']
+  });
+}
+
+function startBirthday(){
+document.body.classList.add("birthday-mode");
+  content.innerHTML = `
+    <div class="birthday-container">
+      <div class="birthday-text">HAPPY
+BIRTHDAY</div>
+    </div>
+
+    <div class="balloon"></div>
+    <div class="balloon"></div>
+    <div class="balloon"></div>
+    <div class="balloon"></div>
+    <div class="balloon"></div>
+    <div class="balloon"></div>
+    <div class="balloon"></div>
+    <div class="balloon"></div>
+    <div class="balloon"></div>
+    <div class="balloon"></div>
+    <div class="balloon"></div>
+    <div class="balloon"></div>
+    <div class="balloon"></div>
+    <div class="balloon"></div>
+    <div class="balloon"></div>
+
+    <div class="firework"></div>
+    <div class="firework"></div>
+    <div class="firework"></div>
+    <div class="firework"></div>
+    <div class="firework"></div>
+    <div class="firework"></div>
+  `;
+
+  setInterval(function(){
+    launchConfetti();
+  },1500);
+}
+
+function updateCountdown(){
+  const now = new Date().getTime();
+  const distance = targetDate - now;
+
+  if(distance <= 0){
+  clearInterval(timer);
+  startBirthday();
+
+  // gửi tín hiệu mở khóa nút ở index
+  window.parent.postMessage("unlock","*");
+
+  return;
+}
+
+  const d = Math.floor(distance/(1000*60*60*24));
+  const h = Math.floor((distance%(1000*60*60*24))/(1000*60*60));
+  const m = Math.floor((distance%(1000*60*60))/(1000*60));
+  const s = Math.floor((distance%(1000*60))/1000);
+
+  content.innerHTML = `
+    <div class="waiting-wrapper">
+      <div class="waiting-row">
+        <span class="icon">🍀</span>
+        <div class="waiting-text">Just a little longer, bbi</div>
+        <span class="icon">✨</span>
+      </div>
+      <div class="countdown">${d} ngày ${h} giờ ${m} phút ${s} giây</div>
+    </div>
+  `;
+}
+
+const timer = setInterval(updateCountdown,1000);
+updateCountdown();
+</script>
+
+</body>
+</html>
